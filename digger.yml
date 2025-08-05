@@ -1,0 +1,5 @@
+projects:
+  - name: fundaztic
+    dir: fundaztic
+    opentofu: false
+    terraform: true
