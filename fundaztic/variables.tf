@@ -2,7 +2,7 @@ variable "tenancy_ocid" {
   type        = string
   description = "OCI Tenancy OCID"
 }
-
+#dummy comment
 variable "user_ocid" {
   type        = string
   description = "OCI User OCID"
