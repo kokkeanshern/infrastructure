@@ -8,9 +8,9 @@ provider "oci" {
 
 terraform {
   backend "oci" {
-    namespace = var.namespace
+    namespace = "ax1h9bph8nyo"
     bucket    = "terraform-state-backend"
     key       = "fundaztic/dev.tfstate"
-    region    = var.region
+    region    = "ap-singapore-1"
   }
 }
