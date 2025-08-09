@@ -30,9 +30,13 @@ jobs:
           digger-spec: ${{ inputs.spec }}
           setup-terraform: true
           terraform-version: 1.12.2
-          # setup-aws: true
-          # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
+          TF_VAR_oci_tenancy_id: ${{ secrets.OCI_TENANCY }}
+          TF_VAR_oci_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
+          TF_VAR_oci_user_id: ${{ secrets.OCI_USER_ID }}
+          TF_VAR_oci_fingerprint: ${{ secrets.OCI_FINGERPRINT }}
+          TF_VAR_oci_private_key: ${{ secrets.OCI_PRIVATE_KEY }}
+          TF_VAR_oci_region: ${{ secrets.OCI_REGION }}
+          TF_VAR_oci_namespace: ${{ secrets.OCI_NAMESPACE }}
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
