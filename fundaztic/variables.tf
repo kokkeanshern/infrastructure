@@ -18,11 +18,6 @@ variable "compartment_id" {
   description = "Compartment OCID"
 }
 
-variable "private_key" {
-  type        = string
-  description = "Private key for API authentication"
-}
-
 variable "region" {
   type        = string
   description = "OCI Region"
