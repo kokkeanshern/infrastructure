@@ -14,3 +14,5 @@ jobs:
         run: |
           echo "Current directory is:"
           pwd
+      - run: pwd
+      - run: ls -la
