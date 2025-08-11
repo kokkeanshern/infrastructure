@@ -14,3 +14,4 @@ terraform {
     region    = "ap-singapore-1"
   }
 }
+#dummy line
