@@ -2,7 +2,7 @@ provider "oci" {
 }
 
 terraform {
-  backend "oci" {
+  backend "s3" {
     namespace                   = "ax1h9bph8nyo"
     bucket                      = "terraform-state-backend"
     key                         = "fundaztic/dev.tfstate"
