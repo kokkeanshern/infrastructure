@@ -28,4 +28,4 @@ jobs:
 
       - name: Test OCI Authentication
         run: |
-          oci iam compartment list --all
+          oci iam compartment list --compartment-id ocid1.tenancy.oc1..aaaaaaaa4gsdatqr4iu26stu45vhvtdy3qtzzapaeztf2wazln2qhxlvfwjq
