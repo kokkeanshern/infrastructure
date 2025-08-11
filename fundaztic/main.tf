@@ -3,7 +3,7 @@ provider "oci" {
   user_ocid    = var.user_ocid
   fingerprint  = var.fingerprint
   private_key  = var.private_key
-  region       = var.region
+  region       = "ap-singapore-1"
 }
 
 terraform {
