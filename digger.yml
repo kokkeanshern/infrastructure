@@ -1,5 +1,32 @@
+telemetry: false
+auto_merge: true
+auto_merge_strategy: squash
+pr_locks: true
+allow_draft_prs: false
+traverse_to_nested_projects: false
+
+workflows:
+  oracle:
+    plan:
+      steps:
+        - init:
+            extra_args: ["-upgrade"]
+        - plan
+    apply:
+      steps:
+        - init:
+            extra_args: ["-upgrade"]
+        - apply:
+            extra_args: ["-auto-approve"]
+    workflow_configuration:
+      on_pull_request_pushed: ["digger plan"]
+      on_pull_request_closed: ["digger unlock"]
+      on_commit_to_default: ["digger apply"]
+      skip_merge_check: false
+
 projects:
   - name: fundaztic
     dir: fundaztic
     opentofu: false
     terraform: true
+    workflow: oracle
