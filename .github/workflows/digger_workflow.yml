@@ -27,10 +27,10 @@ jobs:
       - name: ${{ fromJSON(github.event.inputs.spec).job_id }}
         run: echo "job id ${{ fromJSON(github.event.inputs.spec).job_id }}"
 
-      - name: Save OCI private key
-        run: |
-            mkdir -p ~/.oci
-            echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/oci_api_key.pem
+      # - name: Save OCI private key
+      #   run: |
+      #       mkdir -p ~/.oci
+      #       echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/oci_api_key.pem
 
       - uses: diggerhq/digger@vLatest
         with:
@@ -44,5 +44,6 @@ jobs:
           TF_VAR_fingerprint: ${{ secrets.OCI_FINGERPRINT }}
           TF_VAR_region: ${{ secrets.OCI_REGION }}
           TF_VAR_namespace: ${{ secrets.OCI_NAMESPACE }}
+          TF_VAR_private_key: ${{ secrets.OCI_PRIVATE_KEY }}
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -18,6 +18,10 @@ variable "compartment_id" {
   description = "Compartment OCID"
 }
 
+variable "private_key" {
+  default = ""
+}
+
 variable "region" {
   type        = string
   description = "OCI Region"
