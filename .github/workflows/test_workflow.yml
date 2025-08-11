@@ -12,6 +12,9 @@ jobs:
         working-directory: fundaztic
     steps:
       - uses: actions/checkout@v4
-      
+
       - run: pwd
       - run: ls -la
+      - name: Test OCI Authentication
+        run: |
+          oci iam compartment list --all
