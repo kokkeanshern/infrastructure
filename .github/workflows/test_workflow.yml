@@ -1,0 +1,16 @@
+name: Debug Digger Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  debug_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Debug Digger Workflow
+        run: |
+          echo "Current directory is:"
+          pwd
