@@ -1,14 +1,14 @@
-variable "tenancy_ocid" {
-}
+# variable "tenancy_ocid" {
+# }
 
-variable "user_ocid" {
-}
+# variable "user_ocid" {
+# }
 
-variable "fingerprint" {
-}
+# variable "fingerprint" {
+# }
 
 variable "compartment_id" {
 }
 
-variable "private_key" {
-}
+# variable "private_key" {
+# }

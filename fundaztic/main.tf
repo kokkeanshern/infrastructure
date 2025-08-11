@@ -1,9 +1,9 @@
 provider "oci" {
-  tenancy_ocid = var.tenancy_ocid
-  user_ocid    = var.user_ocid
-  fingerprint  = var.fingerprint
-  private_key  = var.private_key
-  region       = "ap-singapore-1"
+  # tenancy_ocid = var.tenancy_ocid
+  # user_ocid    = var.user_ocid
+  # fingerprint  = var.fingerprint
+  # private_key  = var.private_key
+  # region       = "ap-singapore-1"
 }
 
 terraform {
@@ -14,4 +14,3 @@ terraform {
     region    = "ap-singapore-1"
   }
 }
-#dummy line

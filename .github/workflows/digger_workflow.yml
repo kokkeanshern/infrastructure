@@ -1,49 +1,74 @@
-# name: Digger Workflow
+name: Digger Workflow
 
-# on:
-#   workflow_dispatch:
-#     inputs:
-#       spec:
-#         required: true
-#       run_name:
-#         required: false
+on:
+  workflow_dispatch:
+    inputs:
+      spec:
+        required: true
+      run_name:
+        required: false
 
-# run-name: '${{inputs.run_name}}'
+env:
+  TF_VAR_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
 
-# jobs:
-#   digger-job:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       contents: write      # required to merge PRs
-#       actions: write       # required for plan persistence
-#       id-token: write      # required for workload-identity-federation
-#       pull-requests: write # required to post PR comments
-#       issues: read         # required to check if PR number is an issue or not
-#       statuses: write      # required to validate combined PR status
+run-name: '${{inputs.run_name}}'
 
-#     steps:
-#       - uses: actions/checkout@v4
+jobs:
+  digger-job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # required to merge PRs
+      actions: write       # required for plan persistence
+      id-token: write      # required for workload-identity-federation
+      pull-requests: write # required to post PR comments
+      issues: read         # required to check if PR number is an issue or not
+      statuses: write      # required to validate combined PR status
+    defaults:
+      run:
+        working-directory: fundaztic
 
-#       - name: ${{ fromJSON(github.event.inputs.spec).job_id }}
-#         run: echo "job id ${{ fromJSON(github.event.inputs.spec).job_id }}"
+    steps:
+      - uses: actions/checkout@v4
 
-#       # - name: Save OCI private key
-#       #   run: |
-#       #       mkdir -p ~/.oci
-#       #       echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/oci_api_key.pem
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10.11'
 
-#       - uses: diggerhq/digger@vLatest
-#         with:
-#           digger-spec: ${{ inputs.spec }}
-#           setup-terraform: true
-#           terraform-version: 1.12.2
-#         env:
-#           TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY }}
-#           TF_VAR_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
-#           TF_VAR_user_ocid: ${{ secrets.OCI_USER_ID }}
-#           TF_VAR_fingerprint: ${{ secrets.OCI_FINGERPRINT }}
-#           TF_VAR_region: ${{ secrets.OCI_REGION }}
-#           TF_VAR_namespace: ${{ secrets.OCI_NAMESPACE }}
-#           TF_VAR_private_key: ${{ secrets.OCI_PRIVATE_KEY }}
-#           GITHUB_CONTEXT: ${{ toJson(github) }}
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install OCI CLI
+        run: |
+          bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" -- --accept-all-defaults
+          echo "$HOME/bin" >> $GITHUB_PATH
+
+      - name: Create OCI config directory
+        run: mkdir -p ~/.oci
+
+      - name: Save OCI private key
+        run: |
+            echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/oci_api_key.pem
+
+      - name: Write OCI config file
+        run: |
+          echo "[DEFAULT]" > ~/.oci/config
+          echo "user=${{ secrets.OCI_USER_ID }}" >> ~/.oci/config
+          echo "fingerprint=${{ secrets.OCI_FINGERPRINT }}" >> ~/.oci/config
+          echo "key_file=/home/runner/.oci/oci_api_key.pem" >> ~/.oci/config
+          echo "tenancy=${{ secrets.OCI_TENANCY }}" >> ~/.oci/config
+          echo "region=ap-singapore-1" >> ~/.oci/config
+        shell: bash
+
+      - uses: diggerhq/digger@vLatest
+        with:
+          digger-spec: ${{ inputs.spec }}
+          setup-terraform: true
+          terraform-version: 1.12.2
+        env:
+          # TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY }}
+          # TF_VAR_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
+          # TF_VAR_user_ocid: ${{ secrets.OCI_USER_ID }}
+          # TF_VAR_fingerprint: ${{ secrets.OCI_FINGERPRINT }}
+          # TF_VAR_region: ${{ secrets.OCI_REGION }}
+          # TF_VAR_namespace: ${{ secrets.OCI_NAMESPACE }}
+          # TF_VAR_private_key: ${{ secrets.OCI_PRIVATE_KEY }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
