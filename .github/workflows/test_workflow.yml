@@ -33,7 +33,7 @@ jobs:
       - name: Write OCI config file
         run: |
           echo "[DEFAULT]" > ~/.oci/config
-          echo "user=${{ secrets.OCI_USER_OCID }}" >> ~/.oci/config
+          echo "user=${{ secrets.OCI_USER_ID }}" >> ~/.oci/config
           echo "fingerprint=${{ secrets.OCI_FINGERPRINT }}" >> ~/.oci/config
           echo "key_file=/home/runner/.oci/oci_api_key.pem" >> ~/.oci/config
           echo "tenancy=${{ secrets.OCI_TENANCY }}" >> ~/.oci/config
