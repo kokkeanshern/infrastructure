@@ -25,14 +25,20 @@ workflows:
       skip_merge_check: false
 
 projects:
-  - name: fundaztic
-    dir: fundaztic
+  - &default
+    name: oracle-compartments
+    dir: oracle/compartments
     opentofu: false
     terraform: true
+    terragrunt: false
     workflow: oracle
-
-  - name: network
-    dir: network
-    opentofu: false
-    terraform: true
-    workflow: oracle
+    include_patterns: []
+    exclude_patterns: []
+    depends_on: []
+    aws_role_to_assume: ~
+  - !!merge <<: *default 
+    name: oracle-fundaztic
+    dir: oracle/fundaztic
+  - !!merge <<: *default 
+    name: oracle-network
+    dir: oracle/network
