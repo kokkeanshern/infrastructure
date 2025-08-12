@@ -1,68 +1,65 @@
-name: Digger Workflow
+# name: Digger Workflow
 
-on:
-  workflow_dispatch:
-    inputs:
-      spec:
-        required: true
-      run_name:
-        required: false
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       spec:
+#         required: true
+#       run_name:
+#         required: false
 
-env:
-  TF_VAR_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
-  TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY }}
+# env:
+#   TF_VAR_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
+#   TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY }}
 
-run-name: '${{inputs.run_name}}'
+# run-name: '${{inputs.run_name}}'
 
-jobs:
-  digger-job:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write      # required to merge PRs
-      actions: write       # required for plan persistence
-      id-token: write      # required for workload-identity-federation
-      pull-requests: write # required to post PR comments
-      issues: read         # required to check if PR number is an issue or not
-      statuses: write      # required to validate combined PR status
-    defaults:
-      run:
-        working-directory: fundaztic
+# jobs:
+#   digger-job:
+#     runs-on: ubuntu-latest
+#     permissions:
+#       contents: write      # required to merge PRs
+#       actions: write       # required for plan persistence
+#       id-token: write      # required for workload-identity-federation
+#       pull-requests: write # required to post PR comments
+#       issues: read         # required to check if PR number is an issue or not
+#       statuses: write      # required to validate combined PR status
+#     steps:
+#       - uses: actions/checkout@v4
+#       # - name: Set up Python
+#       #   uses: actions/setup-python@v4
+#       #   with:
+#       #     python-version: '3.10.11'
 
-    steps:
-      - uses: actions/checkout@v4
+#       # - name: Install OCI CLI
+#       #   run: |
+#       #     bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" -- --accept-all-defaults
+#       #     echo "$HOME/bin" >> $GITHUB_PATH
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10.11'
+#       - name: Setup OCI Config and key
+#         run: |
+#           mkdir -p ~/.oci
+#           echo"[]" > ~/.oci/config"
 
-      - name: Install OCI CLI
-        run: |
-          bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" -- --accept-all-defaults
-          echo "$HOME/bin" >> $GITHUB_PATH
+#       - name: Save OCI private key
+#         run: |
+#             echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/oci_api_key.pem
 
-      - name: Create OCI config directory
-        run: mkdir -p ~/.oci
+#       - name: Write OCI config file
+#         run: |
+#           echo "[DEFAULT]" > ~/.oci/config
+#           echo "user=${{ secrets.OCI_USER_ID }}" >> ~/.oci/config
+#           echo "fingerprint=${{ secrets.OCI_FINGERPRINT }}" >> ~/.oci/config
+#           echo "key_file=/home/runner/.oci/oci_api_key.pem" >> ~/.oci/config
+#           echo "tenancy=${{ secrets.OCI_TENANCY }}" >> ~/.oci/config
+#           echo "region=ap-singapore-1" >> ~/.oci/config
+#         shell: bash
 
-      - name: Save OCI private key
-        run: |
-            echo "${{ secrets.OCI_PRIVATE_KEY }}" > ~/.oci/oci_api_key.pem
-
-      - name: Write OCI config file
-        run: |
-          echo "[DEFAULT]" > ~/.oci/config
-          echo "user=${{ secrets.OCI_USER_ID }}" >> ~/.oci/config
-          echo "fingerprint=${{ secrets.OCI_FINGERPRINT }}" >> ~/.oci/config
-          echo "key_file=/home/runner/.oci/oci_api_key.pem" >> ~/.oci/config
-          echo "tenancy=${{ secrets.OCI_TENANCY }}" >> ~/.oci/config
-          echo "region=ap-singapore-1" >> ~/.oci/config
-        shell: bash
-
-      - uses: diggerhq/digger@vLatest
-        with:
-          digger-spec: ${{ inputs.spec }}
-          setup-terraform: true
-          terraform-version: 1.12.2
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - uses: diggerhq/digger@vLatest
+#         with:
+#           digger-spec: ${{ inputs.spec }}
+#           setup-terraform: true
+#           terraform-version: 1.12.2
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
