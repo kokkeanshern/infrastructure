@@ -8,10 +8,6 @@ on:
       run_name:
         required: false
 
-env:
-  TF_VAR_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
-  TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY }}
-
 run-name: '${{inputs.run_name}}'
 
 jobs:
@@ -26,16 +22,6 @@ jobs:
       statuses: write      # required to validate combined PR status
     steps:
       - uses: actions/checkout@v4
-      # - name: Set up Python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.10.11'
-
-      # - name: Install OCI CLI
-      #   run: |
-      #     bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" -- --accept-all-defaults
-      #     echo "$HOME/bin" >> $GITHUB_PATH
-
       - name: Setup OCI Config and key
         run: |
           mkdir -p ~/.oci

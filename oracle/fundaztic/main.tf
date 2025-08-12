@@ -3,9 +3,10 @@ provider "oci" {
 
 terraform {
   backend "oci" {
-    namespace = "ax1h9bph8nyo"
-    bucket    = "terraform-state-backend"
-    key       = "fundaztic/dev.tfstate"
-    region    = "ap-singapore-1"
+    bucket              = "bucket-tfstate-fundaztic"
+    namespace           = "ax1h9bph8nyo"
+    key                 = "oracle/fundaztic/terraform.tfstate"
+    region              = "ap-singapore-1"
+    config_file_profile = "DEFAULT"
   }
 }
