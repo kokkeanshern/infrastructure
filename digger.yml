@@ -1,5 +1,5 @@
 telemetry: false
-auto_merge: true
+auto_merge: false
 auto_merge_strategy: squash
 pr_locks: true
 allow_draft_prs: false
@@ -27,6 +27,12 @@ workflows:
 projects:
   - name: fundaztic
     dir: fundaztic
+    opentofu: false
+    terraform: true
+    workflow: oracle
+
+  - name: network
+    dir: network
     opentofu: false
     terraform: true
     workflow: oracle

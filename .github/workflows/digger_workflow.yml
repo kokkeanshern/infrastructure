@@ -10,6 +10,7 @@ on:
 
 env:
   TF_VAR_compartment_id: ${{ secrets.OCI_COMPARTMENT_ID }}
+  TF_VAR_tenancy_ocid: ${{ secrets.OCI_TENANCY }}
 
 run-name: '${{inputs.run_name}}'
 

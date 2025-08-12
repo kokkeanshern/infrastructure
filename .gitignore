@@ -1,2 +1,3 @@
 # ignore local Terraform state files
 **/.terraform*
+**.tfstate
