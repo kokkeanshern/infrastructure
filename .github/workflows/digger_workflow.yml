@@ -37,7 +37,6 @@ jobs:
       #     echo "$HOME/bin" >> $GITHUB_PATH
 
       - name: Setup OCI Config and key
-        description: Uses a service user in OCI for terraform operations
         run: |
           mkdir -p ~/.oci
           echo "${{ secrets.TF_SERVICE_USER_PRIVATE_KEY }}" > ~/.oci/oci_api_key.pem
