@@ -39,7 +39,7 @@
 #       - name: Setup OCI Config and key
 #         run: |
 #           mkdir -p ~/.oci
-#           echo"[]" > ~/.oci/config"
+#           echo"[ap-singapore-1]" > ~/.oci/config"
 
 #       - name: Save OCI private key
 #         run: |
