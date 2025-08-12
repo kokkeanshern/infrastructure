@@ -30,3 +30,9 @@ projects:
     opentofu: false
     terraform: true
     workflow: oracle
+
+  - name: network
+    dir: network
+    opentofu: false
+    terraform: true
+    workflow: oracle
