@@ -36,3 +36,5 @@ projects:
     opentofu: false
     terraform: true
     workflow: oracle
+
+auto_merge: false
