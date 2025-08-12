@@ -1,2 +1,5 @@
-variable "tenancy_ocid" {
-}
+# variable "tenancy_ocid" {
+# }
+
+# variable "compartment_id" {
+# }
