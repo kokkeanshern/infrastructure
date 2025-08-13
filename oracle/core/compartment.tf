@@ -5,12 +5,12 @@ module "compartment_core" {
   parent_compartment_id = var.tenancy_ocid
 }
 
-# module "compartment_fundaztic" {
-#   source                = "../modules/compartments"
-#   name                  = "compartment-fundaztic"
-#   description           = "compartment for fundaztic resources"
-#   parent_compartment_id = var.tenancy_ocid
-# }
+module "compartment_fundaztic" {
+  source                = "../modules/compartments"
+  name                  = "compartment-fundaztic"
+  description           = "compartment for fundaztic resources"
+  parent_compartment_id = var.tenancy_ocid
+}
 
 module "compartment_network" {
   source                = "../modules/compartments"
