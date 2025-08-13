@@ -12,6 +12,7 @@ resource "oci_identity_policy" "tf_bucket_access" {
 
   statements = [
     "Allow group ${data.oci_identity_groups.service_user_group.groups[0].name} to read buckets in compartment ${oci_identity_compartment.compartment.name}",
+    "Allow group ${data.oci_identity_groups.service_user_group.groups[0].name} to read objects in compartment ${oci_identity_compartment.compartment.name}",
     "Allow group ${data.oci_identity_groups.service_user_group.groups[0].name} to manage objects in compartment ${oci_identity_compartment.compartment.name}"
   ]
 }
