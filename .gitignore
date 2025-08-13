@@ -1,3 +1,5 @@
 # ignore local Terraform state files
 **/.terraform*
 **.tfstate
+**tfstate-backup.json
+**.tfstate.backup
