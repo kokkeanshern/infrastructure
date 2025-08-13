@@ -1,0 +1,16 @@
+resource "oci_core_security_list" "security_list_private_shared" {
+  compartment_id = var.compartment_id
+  vcn_id         = module.vcn_shared.vcn_id
+  display_name   = "security-list-private-shared"
+
+  egress_security_rules {
+    protocol         = "6"         # TCP
+    destination      = "0.0.0.0/0" # Anywhere (or restrict to SMTP server IP range)
+    destination_type = "CIDR_BLOCK"
+    tcp_options {
+      min = 587
+      max = 587
+    }
+    stateless = false # Stateful connection
+  }
+}
