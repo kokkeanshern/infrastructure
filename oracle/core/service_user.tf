@@ -25,3 +25,13 @@ resource "oci_identity_user_capabilities_management" "service_user_terraform_cap
   can_use_customer_secret_keys = "true"
   can_use_smtp_credentials     = "false"
 }
+
+resource "oci_identity_policy" "full_admin" {
+  name           = "FullAdminAccess"
+  description    = "Service account with full control over all resources"
+  compartment_id = var.tenancy_ocid
+
+  statements = [
+    "Allow group TerraformServiceUsers to manage all-resources in tenancy"
+  ]
+}
