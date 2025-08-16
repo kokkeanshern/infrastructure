@@ -1,6 +1,6 @@
 resource "oci_core_instance" "fundaztic_instance" {
   display_name        = "fundaztic-instance"
-  availability_domain = var.oci_identity_availability_domains.ads.availability_domains[0].name
+  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
   compartment_id      = var.compartment_id
 
   shape = "VM.Standard.A1.Flex"
