@@ -4,7 +4,7 @@ data "oci_identity_availability_domains" "ads" {
 
 data "oci_core_vcns" "vcn_shared" {
   compartment_id = var.compartment_id
-  display_name   = "vcn-shared"
+  display_name   = "vcn_shared"
 }
 
 data "oci_core_subnets" "subnet_shared_private" {
