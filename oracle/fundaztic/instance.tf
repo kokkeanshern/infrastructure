@@ -27,15 +27,15 @@ resource "oci_core_instance" "fundaztic_instance" {
     recovery_action = "RESTORE_INSTANCE"
   }
 
-  metadata = {
-    user_data = base64encode(
-      templatefile("${path.module}/cloud_init/cloud-init.sh", {
-        # oci_username   = var.oci_username
-        # oci_region     = var.oci_region
-        # oci_auth_token = var.oci_auth_token
-        # docker_image   = var.docker_image
-      })
-    )
-  }
+  # metadata = {
+  #   user_data = base64encode(
+  #     templatefile("${path.module}/cloud_init/cloud-init.sh", {
+  #       # oci_username   = var.oci_username
+  #       # oci_region     = var.oci_region
+  #       # oci_auth_token = var.oci_auth_token
+  #       # docker_image   = var.docker_image
+  #     })
+  #   )
+  # }
 
 }
