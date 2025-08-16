@@ -27,6 +27,11 @@ resource "oci_core_instance" "fundaztic_instance" {
     recovery_action = "RESTORE_INSTANCE"
   }
 
+  source_details {
+    source_type = "image"
+    source_id   = local.image_id_ubuntu_2404_arm
+  }
+
   # metadata = {
   #   user_data = base64encode(
   #     templatefile("${path.module}/cloud_init/cloud-init.sh", {
