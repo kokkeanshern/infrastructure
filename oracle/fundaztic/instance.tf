@@ -33,7 +33,7 @@ resource "oci_core_instance" "fundaztic_instance" {
   }
 
   metadata = {
-    ssh_authorized_keys = file("${path.module}/ssh_keys/instance_fundaztic_ssh_key.pub")
+    ssh_authorized_keys = file("./ssh_keys/instance_fundaztic_ssh_key.pub")
   }
 
   # metadata = {
