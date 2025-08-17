@@ -3,3 +3,5 @@
 **.tfstate
 **tfstate-backup.json
 **.tfstate.backup
+**/ssh_keys/*
+!**/ssh_keys/.gitkeep

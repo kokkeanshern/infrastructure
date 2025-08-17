@@ -32,6 +32,10 @@ resource "oci_core_instance" "fundaztic_instance" {
     source_id   = local.image_id_ubuntu_2404_arm
   }
 
+  metadata = {
+    ssh_authorized_keys = file("${path.module}/ssh_keys/instance_fundaztic_ssh_key.pub")
+  }
+
   # metadata = {
   #   user_data = base64encode(
   #     templatefile("${path.module}/cloud_init/cloud-init.sh", {
