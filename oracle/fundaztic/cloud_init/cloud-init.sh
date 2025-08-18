@@ -1,27 +1,28 @@
-#!/bin/bash
-set -e
+docker login -u 'instance_principal' sin.ocir.io
 
-NAMESPACE="ax1h9bph8nyo"
+docker pull sin.ocir.io/ax1h9bph8nyo/fundaztic/prod:latest
 
-# --- Vars from Terraform (injected via user_data) ---
-OCI_USERNAME="${oci_username}"
-OCI_REGION=sin.ocir.io
-OCI_AUTH_TOKEN="${oci_auth_token}"
-DOCKER_IMAGE="${docker_image}"
-
-# --- Install Docker ---
 yum update -y
 yum install -y docker
 systemctl enable docker
 systemctl start docker
 
-# --- Login to OCIR ---
-docker login ${OCI_REGION} \
-  -u "${NAMESPACE}/${OCI_USERNAME}" \
-  -p "${OCI_AUTH_TOKEN}"
+# Install OCI CLI (if not already installed)
+if ! command -v oci &> /dev/null; then
+    bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)" -- \
+        --accept-all-defaults
+    echo "export PATH=\$PATH:/root/bin" >> /root/.bashrc
+    export PATH=$PATH:/root/bin
+fi
 
-# --- Pull image ---
-docker pull ${OCI_REGION}/${NAMESPACE}/${DOCKER_IMAGE}
+NAMESPACE="ax1h9bph8nyo"
+REGION_KEY="sin"
+
+
+echo "Logging into OCIR..."
+cat /dev/null | docker login -u 'instance_principal' ${REGION_KEY}.ocir.io --password-stdin
+
+docker pull ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest || true
 
 # --- Run container (adjust as needed) ---
 docker run -d --name myapp-container ${OCI_REGION}/${NAMESPACE}/${DOCKER_IMAGE}

@@ -10,3 +10,8 @@ variable "compartment_id_network" {
   default     = "ocid1.compartment.oc1..aaaaaaaabhm4uivzzdkeowpjp7kfcrdmp5ci7a4tthfxqjlbso7736kkeqma"
 }
 
+variable "tenancy_ocid" {
+  description = "The OCID of the tenancy"
+  type        = string
+  default     = "ocid1.tenancy.oc1..aaaaaaaa4gsdatqr4iu26stu45vhvtdy3qtzzapaeztf2wazln2qhxlvfwjq"
+}
