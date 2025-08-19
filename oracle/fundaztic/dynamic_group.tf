@@ -1,8 +1,9 @@
 resource "oci_identity_dynamic_group" "instance_dynamic_group" {
   compartment_id = var.tenancy_ocid
   description    = "Dynamic group for Fundaztic instance management"
-  matching_rule  = "ALL instance.compartment.id = ${var.compartment_id}"
-  name           = "fundaztic-instance-dynamic-group"
+  # matching_rule  = "ALL instance.compartment.id = ${var.compartment_id}"
+  matching_rule = "ALL instance.compartment.id = ocid1.compartment.oc1..aaaaaaaawutq5bmyehb2obqa3hcvstm5gzmboh62p7ixwwhdvgz2r73kvynq"
+  name          = "fundaztic-instance-dynamic-group"
 }
 
 resource "oci_identity_policy" "fundaztic_ocir_policy" {
