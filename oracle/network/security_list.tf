@@ -13,4 +13,13 @@ resource "oci_core_security_list" "security_list_private_shared" {
     }
     stateless = false # Stateful connection
   }
+
+  ingress_security_rules {
+    protocol = "6" # TCP
+    source   = "14.192.214.68/32"
+    tcp_options {
+      min = 22
+      max = 22
+    }
+  }
 }
