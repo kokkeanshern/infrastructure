@@ -26,8 +26,8 @@ workflows:
 
 projects:
   - &default
-    name: oracle-compartments
-    dir: oracle/compartments
+    name: oracle-core
+    dir: oracle/core
     opentofu: false
     terraform: true
     terragrunt: false
