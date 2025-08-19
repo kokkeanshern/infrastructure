@@ -1,7 +1,7 @@
-docker login -u 'instance_principal' sin.ocir.io
+#!/bin/bash
+set -e
 
-docker pull sin.ocir.io/ax1h9bph8nyo/fundaztic/prod:latest
-
+# Install Docker
 yum update -y
 yum install -y docker
 systemctl enable docker
@@ -15,17 +15,20 @@ if ! command -v oci &> /dev/null; then
     export PATH=$PATH:/root/bin
 fi
 
-NAMESPACE="ax1h9bph8nyo"
+# Get OCIR namespace
+NAMESPACE=$(oci os ns get --query data --raw-output)
+
+# Region short code (replace with your region, e.g. sin, iad, fra, nrt)
 REGION_KEY="sin"
 
+# Log into OCIR using instance principals
+oci artifacts container login --region ${REGION_KEY}
 
-echo "Logging into OCIR..."
-cat /dev/null | docker login -u 'instance_principal' ${REGION_KEY}.ocir.io --password-stdin
-
+# Optionally pull your images
 docker pull ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest || true
 
 # --- Run container (adjust as needed) ---
-docker run -d --name myapp-container ${OCI_REGION}/${NAMESPACE}/${DOCKER_IMAGE}
+docker run -d --name fundaztic-container ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest
 
-# --- Set up cronjob to run python script inside container every midnight ---
-echo "0 0 * * * docker exec myapp-container python /app/my_script.py" >> /var/spool/cron/root
+# --- Set up cronjob to run python script inside container every hour ---
+echo "0 * * * * docker exec fundaztic-container python /app/my_script.py" >> /var/spool/cron/root
