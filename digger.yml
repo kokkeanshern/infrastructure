@@ -1,5 +1,5 @@
 telemetry: false
-auto_merge: false # temporary
+auto_merge: true
 auto_merge_strategy: squash
 pr_locks: true
 allow_draft_prs: false
