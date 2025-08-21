@@ -43,7 +43,7 @@ resource "oci_identity_policy" "full_admin" {
 ###########################################################################
 # Docker Service User                                                     #
 ###########################################################################
-resource "oci_identity_user" "service_user_terraform" {
+resource "oci_identity_user" "service_user_docker" {
   compartment_id = var.tenancy_ocid # Always tenancy OCID for users
   name           = "service-user-docker"
   description    = "user for Docker operations"
@@ -69,7 +69,7 @@ resource "oci_identity_policy" "ocir_pull_policy" {
 
   statements = [
     "Allow group DockerServiceUsers to read repos in tenancy",
-    "Allow group TerraformServiceUsers to read secret-family in compartment id ${module.compartment_core.id}",
-    "Allow group TerraformServiceUsers to use keys in compartment id ${module.compartment_core.id}"
+    "Allow group DockerServiceUsers to read secret-family in compartment id ${module.compartment_core.id}",
+    "Allow group DockerServiceUsers to use keys in compartment id ${module.compartment_core.id}"
   ]
 }
