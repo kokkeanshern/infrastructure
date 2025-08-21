@@ -26,8 +26,8 @@ workflows:
 
 projects:
   - &default
-    name: oracle-core
-    dir: oracle/core
+    name: oracle-fundaztic
+    dir: oracle/fundazti
     opentofu: false
     terraform: true
     terragrunt: false
@@ -36,9 +36,6 @@ projects:
     exclude_patterns: []
     depends_on: []
     aws_role_to_assume: ~
-  - !!merge <<: *default 
-    name: oracle-fundaztic
-    dir: oracle/fundaztic
   - !!merge <<: *default 
     name: oracle-network
     dir: oracle/network
