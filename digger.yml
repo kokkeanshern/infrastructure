@@ -1,5 +1,5 @@
 telemetry: false
-auto_merge: true
+auto_merge: false
 auto_merge_strategy: squash
 pr_locks: true
 allow_draft_prs: false
@@ -26,8 +26,8 @@ workflows:
 
 projects:
   - &default
-    name: oracle-compartments
-    dir: oracle/compartments
+    name: oracle-core
+    dir: oracle/core
     opentofu: false
     terraform: true
     terragrunt: false

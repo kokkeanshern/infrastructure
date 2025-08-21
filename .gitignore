@@ -5,3 +5,4 @@
 **.tfstate.backup
 **/ssh_keys/*
 !**/ssh_keys/.gitkeep
+!**/ssh_keys/instance_fundaztic_ssh_key.pub
