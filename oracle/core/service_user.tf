@@ -70,6 +70,7 @@ resource "oci_identity_policy" "ocir_pull_policy" {
   statements = [
     "Allow group DockerServiceUsers to read repos in tenancy",
     "Allow group DockerServiceUsers to read secret-family in compartment id ${module.compartment_core.id}",
+    "Allow group DockerServiceUsers to read secret-bundles in compartment id ${module.compartment_core.id}",
     "Allow group DockerServiceUsers to use keys in compartment id ${module.compartment_core.id}"
   ]
 }
