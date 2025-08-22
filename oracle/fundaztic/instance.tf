@@ -12,7 +12,7 @@ resource "oci_core_instance" "fundaztic_instance" {
   create_vnic_details {
     assign_ipv6ip             = "false"
     assign_private_dns_record = "true"
-    assign_public_ip          = "true" # temporary test for debugging.
+    assign_public_ip          = "true" # temporary test for debugging
     display_name              = "vnic-fundaztic"
     subnet_id                 = data.oci_core_subnets.subnet_shared_public.subnets[0].id
     nsg_ids                   = [] # Add network security group IDs if needed
