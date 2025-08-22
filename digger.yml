@@ -27,7 +27,7 @@ workflows:
 projects:
   - &default
     name: oracle-fundaztic
-    dir: oracle/fundazti
+    dir: oracle/fundaztic
     opentofu: false
     terraform: true
     terragrunt: false
