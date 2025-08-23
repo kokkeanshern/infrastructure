@@ -13,7 +13,7 @@ resource "oci_core_security_list" "security_list_private_shared" {
   ingress_security_rules {
     protocol    = "6" # TCP
     source_type = "CIDR_BLOCK"
-    source      = "14.192.212.150/32"
+    source      = "149.88.106.136/32"
     tcp_options {
       min = 22
       max = 22
@@ -36,7 +36,7 @@ resource "oci_core_security_list" "security_list_public_shared" {
   ingress_security_rules {
     protocol    = "6" # TCP
     source_type = "CIDR_BLOCK"
-    source      = "14.192.212.150/32"
+    source      = "149.88.106.136/32"
     tcp_options {
       min = 22
       max = 22
