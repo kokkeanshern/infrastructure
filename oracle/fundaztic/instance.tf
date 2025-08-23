@@ -1,39 +1,39 @@
-# resource "oci_core_instance" "fundaztic_instance" {
-#   display_name        = "fundaztic-instance"
-#   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
-#   compartment_id      = var.compartment_id
+resource "oci_core_instance" "fundaztic_instance" {
+  display_name        = "fundaztic-instance"
+  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
+  compartment_id      = var.compartment_id
 
-#   shape = "VM.Standard.A1.Flex"
-#   shape_config {
-#     memory_in_gbs = "4"
-#     ocpus         = "1"
-#   }
+  shape = "VM.Standard.A1.Flex"
+  shape_config {
+    memory_in_gbs = "4"
+    ocpus         = "1"
+  }
 
-#   create_vnic_details {
-#     assign_ipv6ip             = "false"
-#     assign_private_dns_record = "true"
-#     assign_public_ip          = "true" # temporary test for debugging
-#     display_name              = "vnic-fundaztic"
-#     subnet_id                 = data.oci_core_subnets.subnet_shared_public.subnets[0].id
-#     nsg_ids                   = [] # Add network security group IDs if needed
-#     # route_table_id            = oci_core_route_table.new_route_table.id
-#   }
+  create_vnic_details {
+    assign_ipv6ip             = "false"
+    assign_private_dns_record = "true"
+    assign_public_ip          = "true" # temporary test for debugging
+    display_name              = "vnic-fundaztic"
+    subnet_id                 = data.oci_core_subnets.subnet_shared_public.subnets[0].id
+    nsg_ids                   = [] # Add network security group IDs if needed
+    # route_table_id            = oci_core_route_table.new_route_table.id
+  }
 
-#   instance_options {
-#     are_legacy_imds_endpoints_disabled = true
-#   }
+  instance_options {
+    are_legacy_imds_endpoints_disabled = true
+  }
 
-#   availability_config {
-#     recovery_action = "RESTORE_INSTANCE"
-#   }
+  availability_config {
+    recovery_action = "RESTORE_INSTANCE"
+  }
 
-#   source_details {
-#     source_type = "image"
-#     source_id   = local.image_id_ubuntu_2404_arm
-#   }
+  source_details {
+    source_type = "image"
+    source_id   = local.image_id_ubuntu_2404_arm
+  }
 
-#   metadata = {
-#     # user_data           = base64encode(file("./cloud_init/cloud-init.sh"))
-#     ssh_authorized_keys = file("./ssh_keys/instance_fundaztic_ssh_key.pub")
-#   }
-# }
+  metadata = {
+    # user_data           = base64encode(file("./cloud_init/cloud-init.sh"))
+    ssh_authorized_keys = file("./ssh_keys/instance_fundaztic_ssh_key.pub")
+  }
+}
