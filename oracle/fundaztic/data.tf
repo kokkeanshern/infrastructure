@@ -21,4 +21,5 @@ data "oci_core_subnets" "subnet_shared_public" {
 
 locals {
   image_id_ubuntu_2404_arm = "ocid1.image.oc1.ap-singapore-1.aaaaaaaaqnq4vkvwbtr4k4gcmvamshtworusoi54vuwixafhg6jax7lgydta"
+  image_id_ubuntu_2404_x86 = "ocid1.image.oc1.ap-singapore-1.aaaaaaaaijbd2tsltpwcgvosleso3zrjqbfuhsw3vqkufr364jjoff7pijmq"
 }

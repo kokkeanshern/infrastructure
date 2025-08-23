@@ -48,7 +48,7 @@ echo "${OCI_AUTH_TOKEN}" | docker login ${REGION_KEY}.ocir.io \
 docker pull ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest || true
 
 # # --- Run container (adjust as needed) ---
-# docker run -d --name fundaztic-container ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest
+docker run -d --name fundaztic-container ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest
 
 # # --- Set up cronjob to run python script inside container every hour ---
 # echo "0 * * * * docker exec fundaztic-container python /app/my_script.py" >> /var/spool/cron/root
