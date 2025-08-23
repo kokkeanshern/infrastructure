@@ -35,13 +35,17 @@ source ~/.bashrc
 NAMESPACE=$(oci os ns get --auth instance_principal --query data --raw-output)
 REGION_KEY="sin"
 
-docker login ocir.ap-southeast-1.oraclecloud.com
+OCI_AUTH_TOKEN=$(oci secrets secret-bundle get \
+  --secret-id ocid1.vaultsecret.oc1.ap-singapore-1.amaaaaaadia3kqiabflgrlqscvc2vnbw2d4wrjhylvp65kcxaajez3h6suiq \
+  --auth instance_principal \
+  --query "data.\"secret-bundle-content\".content" \
+  --raw-output | base64 --decode)
 
-# # Log into OCIR using instance principals
-# oci artifacts container login --region ${REGION_KEY}
+echo "${OCI_AUTH_TOKEN}" | docker login ${REGION_KEY}.ocir.io \
+-u "${NAMESPACE}/service-user-docker" --password-stdin
 
 # # Optionally pull your images
-# docker pull ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest || true
+docker pull ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest || true
 
 # # --- Run container (adjust as needed) ---
 # docker run -d --name fundaztic-container ${REGION_KEY}.ocir.io/${NAMESPACE}/fundaztic/prod:latest
