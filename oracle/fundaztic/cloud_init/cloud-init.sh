@@ -49,7 +49,7 @@ echo "${OCI_AUTH_TOKEN}" | sudo docker login ${REGION_KEY}.ocir.io \
 # Add cron job (every 2 minutes) for root
 (
   sudo crontab -l 2>/dev/null
-  echo "*/2 * * * * docker pull sin.ocir.io/ax1h9bph8nyo/fundaztic/dev:latest >> /var/log/fundaztic-scraper.log 2>&1 && docker run --rm sin.ocir.io/ax1h9bph8nyo/fundaztic/dev:latest >> /var/log/fundaztic-scraper.log 2>&1"
+  echo "*/2 * * * * docker pull sin.ocir.io/ax1h9bph8nyo/fundaztic/prod:latest >> /var/log/fundaztic-scraper.log 2>&1 && docker run --rm sin.ocir.io/ax1h9bph8nyo/fundaztic/prod:latest >> /var/log/fundaztic-scraper.log 2>&1"
 ) | sudo crontab -
 
 # Ensure cron service is enabled and started
