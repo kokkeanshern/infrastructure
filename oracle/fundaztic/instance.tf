@@ -29,7 +29,7 @@ resource "oci_core_instance" "fundaztic_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = local.image_id_ubuntu_2404_x86
+    source_id   = local.image_id_ubuntu_2404_arm
   }
 
   metadata = {
