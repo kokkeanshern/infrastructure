@@ -11,5 +11,6 @@ resource "oci_identity_policy" "fundaztic_ocir_policy" {
   compartment_id = var.tenancy_ocid
   statements = [
     "Allow dynamic-group fundaztic-instance-dynamic-group to read repos in compartment id ${var.compartment_id}",
+    "Allow dynamic-group fundaztic-instance-dynamic-group to read secret-bundles in compartment id ${var.compartment_id_core}"
   ]
 }

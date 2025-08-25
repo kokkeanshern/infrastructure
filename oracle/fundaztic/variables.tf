@@ -10,6 +10,12 @@ variable "compartment_id_network" {
   default     = "ocid1.compartment.oc1..aaaaaaaabhm4uivzzdkeowpjp7kfcrdmp5ci7a4tthfxqjlbso7736kkeqma"
 }
 
+variable "compartment_id_core" {
+  description = "The OCID of the compartment where resources will be created."
+  type        = string
+  default     = "ocid1.compartment.oc1..aaaaaaaad4rrzhwjg3ssfpepxv72ha27vscps7mll4gzwu3buxoqa63proca"
+}
+
 variable "tenancy_ocid" {
   description = "The OCID of the tenancy"
   type        = string

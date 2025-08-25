@@ -20,6 +20,6 @@ resource "oci_core_subnet" "subnet_shared_public" {
   cidr_block     = "10.0.0.0/24"
   route_table_id = module.vcn_shared.ig_route_id
   security_list_ids = [
-    oci_core_security_list.security_list_private_shared.id
+    oci_core_security_list.security_list_public_shared.id
   ]
 }

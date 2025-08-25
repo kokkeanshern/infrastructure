@@ -59,7 +59,7 @@ resource "oci_identity_group" "docker_service_users_group" {
 resource "oci_identity_user_group_membership" "docker_service_user_membership" {
   compartment_id = var.tenancy_ocid
   group_id       = oci_identity_group.docker_service_users_group.id
-  user_id        = oci_identity_user.service_user_terraform.id
+  user_id        = oci_identity_user.service_user_docker.id
 }
 
 resource "oci_identity_policy" "ocir_pull_policy" {
@@ -69,8 +69,5 @@ resource "oci_identity_policy" "ocir_pull_policy" {
 
   statements = [
     "Allow group DockerServiceUsers to read repos in tenancy",
-    "Allow group DockerServiceUsers to read secret-family in compartment id ${module.compartment_core.id}",
-    "Allow group DockerServiceUsers to read secret-bundles in compartment id ${module.compartment_core.id}",
-    "Allow group DockerServiceUsers to use keys in compartment id ${module.compartment_core.id}"
   ]
 }
